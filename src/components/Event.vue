@@ -60,4 +60,8 @@ article {
   cursor: pointer;
 }
 
+.remove_btn_wrapper {
+  text-align: right;
+}
+
 </style>
