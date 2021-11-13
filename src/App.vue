@@ -1,7 +1,7 @@
 <template>
 <ul>
   <li v-for="event in events" :key="event.id">
-    <Event :event="event" />
+    <Event :event="event" :daysLeft="daysLeft(event)" />
   </li>
 </ul>
 </template>
@@ -64,8 +64,30 @@ export default {
       events: eventData,
     };
   },
+  methods: {
+    daysLeft(event) {
+      const Time = Date.parse(event.date) - Date.now()
+      Time / 1000
+      console.log(Date.parse(event.date));
+      console.log(Date.now());
+    }
+  }
 };
 </script>
 
 <style >
+#app {
+  font-family: Avenir, Arial, Helvetica, sans-serif;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+ul {
+  padding: 0;
+}
+
+li {
+  list-style: none;
+  cursor: pointer;
+}
 </style>
