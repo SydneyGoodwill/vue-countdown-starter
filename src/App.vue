@@ -1,4 +1,6 @@
-<template></template>
+<template>
+<Event />
+</template>
 
 <script>
 // const eventData = [
@@ -46,7 +48,14 @@
 //   },
 // ];
 
-export default {};
+import Event from "./components/Event.vue";
+
+export default {
+  name: "App",
+  components: {
+    Event,
+  },
+};
 </script>
 
 <style >
