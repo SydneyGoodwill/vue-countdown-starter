@@ -66,10 +66,9 @@ export default {
   },
   methods: {
     daysLeft(event) {
-      const Time = Date.parse(event.date) - Date.now()
-      Time / 1000
-      console.log(Date.parse(event.date));
-      console.log(Date.now());
+      const Time = Date.parse(event.date) - Date.now();
+      const Days = Math.ceil(Time / (1000 * 3600 * 24));
+      return Days
     }
   }
 };
