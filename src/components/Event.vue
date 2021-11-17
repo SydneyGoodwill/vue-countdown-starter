@@ -1,5 +1,7 @@
 <template>
-<article :style="{ background: event.background}">
+<article 
+v-show="Math.sign(daysLeft) === -1"
+:style="{ background: event.background}">
   <div class="data">
     <h3 class="name">{{ event.name }}</h3>
     <p class="details">{{ event.details }}</p>
