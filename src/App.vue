@@ -24,9 +24,9 @@ const eventData = [
   },
   {
     id: 3,
-    name: "HolidayYYYY",
-    details: "Get me outta here!",
-    date: "2020-09-12",
+    name: "Dentist",
+    details: "just a cleaning, whew!",
+    date: "2021-11-17",
     background: "#7AD3F0",
   },
   {
@@ -47,7 +47,7 @@ const eventData = [
     id: 6,
     name: "Conference Talk",
     details: "dont flop",
-    date: "2022-02-24",
+    date: "2021-11-18",
     background: "#68EE94",
   },
 ];
