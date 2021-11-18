@@ -1,17 +1,15 @@
 <template>
-<button @click="events.push({
-    id: 7,
-    name: 'new event',
-    details: 'new details',
-    date: '2020-09-25',
-    background: '#F34949',
-  })">dark mode</button>
-{{ events }}
-<ul>
-  <li v-for="event in events" :key="event.id">
-    <Event :event="event" :daysLeft="daysLeft(event)" />
-  </li>
-</ul>
+<div class="options">
+  <button @click="showPastEvents = !showPastEvents">show past events</button>
+</div>
+  <ul>
+    <li v-for="event in events" :key="event.id">
+      <Event 
+      :event="event" 
+      :daysLeft="daysLeft(event)"
+      :showPastEvents="showPastEvents" />
+    </li>
+  </ul>
 </template>
 
 <script>
@@ -70,23 +68,14 @@ export default {
   data() {
     return {
       events: eventData,
-      darkModeSet: false,
+      showPastEvents: true,
     };
   },
   methods: {
     daysLeft(event) {
       const Time = Date.parse(event.date) - Date.now();
       const Days = Math.ceil(Time / (1000 * 3600 * 24));
-      return Days
-    },
-  },
-  watch: {
-    events: {
-      deep: true,
-      immediate: true,
-      handler(val) {
-        console.log(val);
-      }
+      return Days;
     },
   },
 };
