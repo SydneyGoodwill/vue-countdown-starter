@@ -1,6 +1,6 @@
 <template>
 <article 
-v-show="Math.sign(daysLeft) !== -1"
+v-show="Math.sign(daysLeft) !== 1"
 :style="{ background: event.background}">
   <div class="data">
     <h3 class="name">{{ event.name }}</h3>
@@ -15,7 +15,7 @@ v-show="Math.sign(daysLeft) !== -1"
       {{ Math.abs(daysLeft) }}
       <br/>
       <small>
-        {{ daysLeftString() }}
+        {{ daysLeftString }}
       </small>
     </p>
   </div>
@@ -26,9 +26,9 @@ v-show="Math.sign(daysLeft) !== -1"
 export default {
   name: "Event",
   props: ["event", "daysLeft"],
-  methods: {
+  computed: {
     daysLeftString() {
-      const dayOrDays = this.daysLeft === 1 ? "day" : "days";
+      const dayOrDays = this.daysLeft === 1 ? "day " : "days ";
       const leftOrAgo = Math.sign(this.daysLeft) != -1 ? "left" : "ago";
       return dayOrDays + leftOrAgo;
 
