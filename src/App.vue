@@ -1,13 +1,20 @@
 <template>
-<div class="options">
-  <button @click="showPastEvents = !showPastEvents">show past events</button>
-</div>
+  <teleport to="#modal">
+    <form v-if="showForm">
+      <p>add new event</p>
+    </form>
+  </teleport>
+  <div class="options">
+    <button @click="showPastEvents = !showPastEvents">show past events</button>
+    <button class="addNew" @click="showForm = !showForm">&#43;</button>
+  </div>
   <ul>
     <li v-for="event in orderEvents" :key="event.id">
-      <Event 
-      :event="event" 
-      :daysLeft="daysLeft(event)"
-      :showPastEvents="showPastEvents" />
+      <Event
+        :event="event"
+        :daysLeft="daysLeft(event)"
+        :showPastEvents="showPastEvents"
+      />
     </li>
   </ul>
 </template>
@@ -69,6 +76,7 @@ export default {
     return {
       events: eventData,
       showPastEvents: true,
+      showForm: false,
     };
   },
   methods: {
@@ -80,10 +88,10 @@ export default {
   },
   computed: {
     orderEvents() {
-      const eventsToOrder = this.events
-      return eventsToOrder.sort((a, b) => a.date > b.date ? 1 : -1)
-    }
-  }
+      const eventsToOrder = this.events;
+      return eventsToOrder.sort((a, b) => (a.date > b.date ? 1 : -1));
+    },
+  },
 };
 </script>
 
