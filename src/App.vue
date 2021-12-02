@@ -1,8 +1,6 @@
 <template>
   <teleport to="#modal">
-    <form v-if="showForm">
-      <p>add new event</p>
-    </form>
+    <AddUpdateForm v-if="showForm" />
   </teleport>
   <div class="options">
     <button @click="showPastEvents = !showPastEvents">show past events</button>
@@ -66,11 +64,13 @@ const eventData = [
 ];
 
 import Event from "./components/Event.vue";
+import AddUpdateForm from "./components/AddUpdateForm.vue";
 
 export default {
   name: "App",
   components: {
     Event,
+    AddUpdateForm
   },
   data() {
     return {
