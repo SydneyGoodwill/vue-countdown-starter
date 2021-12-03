@@ -1,22 +1,23 @@
 <template>
   <div class="form_wrapper">
     <form>
+      {{ event }}
       <span class="close" @click="this.$emit('close-form')">&#10060;</span>
       <div>
         <label for="name">Name:</label>
-        <input type="text" id="name">
+        <input type="text" id="name" v-model="event.name" />
       </div>
       <div>
         <label for="details">Details:</label>
-        <input type="text" id="details">
+        <input type="text" id="details" v-model="event.details">
       </div>
       <div>
         <label for="name">Date:</label>
-        <input type="date" id="date">
+        <input type="date" id="date" v-model="event.date">
       </div>
       <div>
         <label for="background">Background:</label>
-        <select id="background">
+        <select id="background" v-model="event.background">
           <option value="#F34949">Red</option>
           <option value="#F07AEC">Pink</option>
           <option value="#997AF0">Purple</option>
@@ -36,6 +37,11 @@
 <script>
 export default {
   emits: ["close-form"],
+  data() {
+    return {
+      event: {},
+    }
+  }
 }
 </script>
 
