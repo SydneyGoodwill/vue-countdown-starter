@@ -2,7 +2,7 @@
   <div class="form_wrapper">
     <form>
       {{ event }}
-      <span class="close" @click="this.$emit('close-form')">&#10060;</span>
+      <span class="close" @click="$emit('close-form')">&#10060;</span>
       <div>
         <label for="name">Name:</label>
         <input type="text" id="name" v-model="event.name" />
@@ -28,7 +28,7 @@
         </select>
       </div>
       <div>
-        <button>add</button>
+        <button @click.prevent="$emit('add-new-event', event)">add</button>
       </div>
     </form>
   </div>
@@ -36,7 +36,7 @@
 
 <script>
 export default {
-  emits: ["close-form"],
+  emits: ["close-form", "add-new-event"],
   data() {
     return {
       event: {},

@@ -1,6 +1,10 @@
 <template>
   <teleport to="#modal">
-    <AddUpdateForm v-if="showForm" @close-form="showForm = false"/>
+    <AddUpdateForm
+    v-if="showForm"
+    @close-form="showForm = false"
+    @add-new-event="add($event)"
+    />
   </teleport>
   <div class="options">
     <button @click="showPastEvents = !showPastEvents">show past events</button>
@@ -80,6 +84,11 @@ export default {
     };
   },
   methods: {
+    add(event) {
+      event.id = this.events.length + 1;
+      this.events.push(event);
+      this.showForm = false;
+    },
     daysLeft(event) {
       const Time = Date.parse(event.date) - Date.now();
       const Days = Math.ceil(Time / (1000 * 3600 * 24));
