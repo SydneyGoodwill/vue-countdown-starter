@@ -1,6 +1,6 @@
 <template>
   <teleport to="#modal">
-    <AddUpdateForm v-if="showForm" />
+    <AddUpdateForm v-if="showForm" @close-form="showForm = false"/>
   </teleport>
   <div class="options">
     <button @click="showPastEvents = !showPastEvents">show past events</button>
