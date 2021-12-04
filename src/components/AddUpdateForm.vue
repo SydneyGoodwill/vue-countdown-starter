@@ -1,7 +1,11 @@
 <template>
   <div class="form_wrapper">
     <form @keyup.enter.prevent="validate()">
-      {{ errors }}
+      <div>
+        <ul>
+          <li v-for="error in errors" :key="error">{{error}}</li>
+        </ul>
+      </div>
       <span class="close" @click="$emit('close-form')">&#10060;</span>
       <div>
         <label for="name">Name:</label>
