@@ -87,7 +87,7 @@ export default {
     add(event) {
       event.id = this.events.length + 1;
       this.events.push(event);
-      this.showForm = false;
+      // this.showForm = false;
     },
     daysLeft(event) {
       const Time = Date.parse(event.date) - Date.now();

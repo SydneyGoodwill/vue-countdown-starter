@@ -1,7 +1,7 @@
 <template>
   <div class="form_wrapper">
-    <form>
-      {{ event }}
+    <form @keyup.enter.prevent="validate()">
+      {{ errors }}
       <span class="close" @click="$emit('close-form')">&#10060;</span>
       <div>
         <label for="name">Name:</label>
@@ -9,11 +9,11 @@
       </div>
       <div>
         <label for="details">Details:</label>
-        <input type="text" id="details" v-model="event.details">
+        <input type="text" id="details" v-model="event.details" />
       </div>
       <div>
         <label for="name">Date:</label>
-        <input type="date" id="date" v-model="event.date">
+        <input type="date" id="date" v-model="event.date" />
       </div>
       <div>
         <label for="background">Background:</label>
@@ -28,7 +28,7 @@
         </select>
       </div>
       <div>
-        <button @click.prevent="$emit('add-new-event', event)">add</button>
+        <button @click.prevent="validate()">add</button>
       </div>
     </form>
   </div>
@@ -40,9 +40,27 @@ export default {
   data() {
     return {
       event: {},
+      errors: []
+    };
+  },
+  methods: {
+    addEvent() {
+      this.$emit('add-new-event', this.event);
+      this.$emit('close-form');
+    },
+    validate() {
+      this.errors = [];
+      if (!this.event.name) this.errors.push("Name is required");
+      if (!this.event.details) this.errors.push("Event details required");
+      if (!this.event.date) this.errors.push("Event date required");
+      if (!this.event.background) this.errors.push("Background is required");
+      // has errors, don't add event
+      if (this.errors.length > 0) return;
+      // no errors, add event to array
+      this.addEvent();
     }
   }
-}
+};
 </script>
 
 <style scoped>
@@ -79,7 +97,8 @@ form > div {
   font-size: 1.6rem;
 }
 
-form input, select {
+form input,
+select {
   margin: 0.6rem 0;
   padding: 0.6rem 1rem;
   border: 1px lightgray solid;
@@ -98,6 +117,4 @@ form button {
 label {
   color: rgb(44, 43, 43);
 }
-
-
 </style>
