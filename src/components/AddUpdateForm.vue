@@ -32,7 +32,8 @@
         </select>
       </div>
       <div>
-        <button @click.prevent="validate()">add</button>
+        <button v-if="currentEvent.id" @click.prevent="validate('update')">update</button>
+        <button v-else @click.prevent="validate('add')">add</button>
       </div>
     </form>
   </div>
@@ -40,7 +41,11 @@
 
 <script>
 export default {
-  emits: ["close-form", "add-new-event"],
+  props: ['currentEvent'],
+  emits: ["close-form", "add-new-event", "update-event"],
+  mounted() {
+    this.event = this.currentEvent;
+  },
   data() {
     return {
       event: {},
@@ -52,7 +57,11 @@ export default {
       this.$emit('add-new-event', this.event);
       this.$emit('close-form');
     },
-    validate() {
+    updateEvent() {
+      this.$emit('update-event', this.event);
+      this.$emit('close-form');
+    },
+    validate(type) {
       this.errors = [];
       if (!this.event.name) this.errors.push("Name is required");
       if (!this.event.details) this.errors.push("Event details required");
@@ -61,7 +70,8 @@ export default {
       // has errors, don't add event
       if (this.errors.length > 0) return;
       // no errors, add event to array
-      this.addEvent();
+      if (type === "add")this.addEvent();
+      else this.updateEvent();
     }
   }
 };

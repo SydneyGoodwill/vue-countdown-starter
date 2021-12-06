@@ -4,6 +4,8 @@
     v-if="showForm"
     @close-form="showForm = false"
     @add-new-event="add($event)"
+    @update-event="update($event)"
+    :currentEvent="currentEvent"
     />
   </teleport>
   <div class="options">
@@ -11,7 +13,7 @@
     <button class="addNew" @click="showForm = !showForm">&#43;</button>
   </div>
   <ul>
-    <li v-for="event in orderEvents" :key="event.id">
+    <li v-for="event in orderEvents" :key="event.id" @click="setForm(event)">
       <Event
         :event="event"
         :daysLeft="daysLeft(event)"
@@ -81,9 +83,19 @@ export default {
       events: eventData,
       showPastEvents: true,
       showForm: false,
+      currentEvent: {},
     };
   },
   methods: {
+    update(event) {
+      const index = this.events.findIndex((el) => el.id === event.id);
+      this.events[index] = event;
+    },
+    setForm(event) {
+      this.currentEvent = event || {};
+      this.showForm = true;
+
+    },
     add(event) {
       event.id = this.events.length + 1;
       this.events.push(event);
