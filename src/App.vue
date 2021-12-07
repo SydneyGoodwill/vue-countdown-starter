@@ -18,6 +18,7 @@
         :event="event"
         :daysLeft="daysLeft(event)"
         :showPastEvents="showPastEvents"
+        @remove-event="remove($event)"
       />
     </li>
   </ul>
@@ -87,6 +88,10 @@ export default {
     };
   },
   methods: {
+    remove(event) {
+      const index = this.events.findIndex((el) => el.id === event.id);
+      this.events.splice(index, 1);
+    },
     closeForm() {
       this.showForm = false
       this.currentEvent = {};
