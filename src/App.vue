@@ -88,17 +88,20 @@ export default {
     };
   },
   methods: {
+    findEventIndex(id) {
+      return this.events.findIndex((el) => el.id === id);
+    },
     remove(event) {
-      const index = this.events.findIndex((el) => el.id === event.id);
-      this.events.splice(index, 1);
+      
+      this.events.splice(this.findEventIndex(event.id), 1);
     },
     closeForm() {
       this.showForm = false
       this.currentEvent = {};
     },
     update(event) {
-      const index = this.events.findIndex((el) => el.id === event.id);
-      this.events[index] = event;
+  
+      this.events[this.findEventIndex(event.id)] = event;
     },
     setForm(event) {
       this.currentEvent = event || {};
