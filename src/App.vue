@@ -2,7 +2,7 @@
   <teleport to="#modal">
     <AddUpdateForm
     v-if="showForm"
-    @close-form="showForm = false"
+    @close-form="closeForm()"
     @add-new-event="add($event)"
     @update-event="update($event)"
     :currentEvent="currentEvent"
@@ -87,6 +87,10 @@ export default {
     };
   },
   methods: {
+    closeForm() {
+      this.showForm = false
+      this.currentEvent = {};
+    },
     update(event) {
       const index = this.events.findIndex((el) => el.id === event.id);
       this.events[index] = event;
