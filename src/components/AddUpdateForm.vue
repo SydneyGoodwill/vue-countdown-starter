@@ -41,7 +41,12 @@
 
 <script>
 export default {
-  props: ['currentEvent'],
+  // props: ['currentEvent'],
+  props: {
+    currentEvent: {
+      type: Object
+    }
+  },
   emits: ["close-form", "add-new-event", "update-event"],
   mounted() {
     this.event = this.currentEvent;

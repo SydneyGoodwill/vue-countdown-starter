@@ -29,7 +29,12 @@ v-show="Math.sign(daysLeft) !== -1 || showPastEvents"
 <script>
 export default {
   name: "Event",
-  props: ["event", "daysLeft", "showPastEvents"],
+  props: {
+    event: { type: Object },
+    daysLeft: { type: Number, default: 10 },
+    showPastEvents: { type: Boolean }
+  },
+  // props: ["event", "daysLeft", "showPastEvents"],
   emits: ["remove-event"],
   methods: {
     remove() {
