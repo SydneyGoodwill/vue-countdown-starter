@@ -9,10 +9,14 @@
     />
   </teleport>
   <div class="options">
-    <button @click="showPastEvents = !showPastEvents">show past events</button>
-    <button @click="grayModeSet = !grayModeSet">
-      {{ grayModeSet ? "&#9788;" : "&#9789;" }}
-    </button>
+    <div class="option_buttons">
+      <button @click="showPastEvents = !showPastEvents">
+        show past events
+      </button>
+      <button @click="grayModeSet = !grayModeSet">
+        {{ grayModeSet ? "&#9788;" : "&#9789;" }}
+      </button>
+    </div>
     <button class="addNew" @click="showForm = !showForm">&#43;</button>
   </div>
   <ul>
@@ -147,6 +151,30 @@ ul {
 
 li {
   list-style: none;
+  cursor: pointer;
+}
+
+.options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.addNew {
+  font-size: 3rem;
+  color: rgb(92, 84, 84);
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+.option_buttons > button {
+  padding: 0.5rem 1rem;
+  margin-right: 1rem;
+  background: none;
+  border-radius: 1rem;
+  border: 2px lightsteelblue solid;
+  font-size: 1.2rem;
   cursor: pointer;
 }
 </style>

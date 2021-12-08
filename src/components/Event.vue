@@ -1,38 +1,43 @@
 <template>
-<article 
-v-show="Math.sign(daysLeft) !== -1 || showPastEvents"
-:style="{
-  background: event.background,
-  color: changeContrast ? '#454444' : 'whitesmoke',
-}"
->
-  <div class="data">
-    <h3 class="name">{{ event.name }}</h3>
-    <p class="details">{{ event.details }}</p>
+  <div class="remove_btn_wrapper">
+    <button @click.stop="remove()" class="remove_btn">&#10060;</button>
   </div>
-  <div class="countdown">
-    <div class="remove_btn_wrapper">
-      <button @click.stop="remove()" class="remove_btn">&#10060;</button>
+  <article
+    v-show="Math.sign(daysLeft) !== -1 || showPastEvents"
+    :style="{
+      background: event.background,
+      color: changeContrast ? '#454444' : 'whitesmoke',
+    }"
+    v-bind="$attrs"
+  >
+    <div class="data">
+      <h3 class="name">{{ event.name }}</h3>
+      <p class="details">{{ event.details }}</p>
     </div>
-    <p v-if="daysLeft === 0">Today!</p>
-    <p v-else>
-      {{ Math.abs(daysLeft) }}
-      <br/>
-      <small>
-        {{ daysLeftString }}
-      </small>
-    </p>
-  </div>
-</article>
+    <div class="countdown">
+      <p v-if="daysLeft === 0">Today!</p>
+      <p v-else>
+        {{ Math.abs(daysLeft) }}
+        <br />
+        <small>
+          {{ daysLeftString }}
+        </small>
+      </p>
+    </div>
+  </article>
 </template>
 
 <script>
 export default {
   name: "Event",
+  // inheritAttrs: false,
+  mounted() {
+    console.log(this.$attrs);
+  },
   props: {
     event: { type: Object },
     daysLeft: { type: Number, default: 10 },
-    showPastEvents: { type: Boolean }
+    showPastEvents: { type: Boolean },
   },
   // props: ["event", "daysLeft", "showPastEvents"],
   emits: ["remove-event"],
@@ -49,8 +54,8 @@ export default {
     },
     changeContrast() {
       const lowContrastBackgrounds = ["#f9f970", "#68EE94"];
-      return lowContrastBackgrounds.includes(this.event.background)
-    }
+      return lowContrastBackgrounds.includes(this.event.background);
+    },
   },
 };
 </script>
@@ -95,5 +100,4 @@ article {
 .remove_btn_wrapper {
   text-align: right;
 }
-
 </style>
